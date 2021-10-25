@@ -6,7 +6,7 @@
 A django application inspired by Awwards that will allow a user to post a project he/she has created and get it reviewed by his/her peers.
 ### Author
 
-**Moses Gakuhi Oct-23-21** - [Github link]()
+**Moses Gakuhi Oct-23-21** - 
 
 
 ## Project setup instructions
@@ -29,7 +29,7 @@ PostgreSQL
 
 When you create a repository on GitHub, it exists as a remote repository. You can clone your repository to create a local copy on your computer and sync between the two locations. Here is a series of steps on how to set up the project on your local machine.
 
-Click [AppAwards]() to navigate on the main page of the project repository on Github.
+Click [A-awards](awards-zawadi.herokuapp.com/) to navigate on the main page of the project repository on Github.
 
 ```
 Clone the repository using HTTPS, click "Clone with HTTPS".
@@ -40,7 +40,7 @@ Open Terminal. Change the current working directory to the location where you wa
 ```
 
 ```
-Type  and press Enter to create your local clone.
+Type git clone https://github.com/MosesGakuhi1857/Awards.git  and press Enter to create your local clone.
 
 ```
 
@@ -63,7 +63,7 @@ Run source virtual/bin/activate to activate the virtual environment and python m
 
 ## Live link
 
-Live link: [AppAwards live link]()
+Live link: [AppAwards live link](awards-zawadi.herokuapp.com/)
 
 ## Support and contact details
 

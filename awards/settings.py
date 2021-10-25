@@ -32,7 +32,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-uv7g!2ew#tv6&pi&bgnzep3s0m-iu!vm*7gk987^ov7afg3egn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 # setup cloudinary credentials for django-cloudinary
 cloudinary.config(
