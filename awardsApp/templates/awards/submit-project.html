@@ -1,0 +1,34 @@
+{%extends 'awards/base.html'%} 
+{% load static %}
+{% load bootstrap5 %}
+{% block content %}
+
+{{pForm.media}}
+
+
+<div class="container-fluid publish-project">
+
+    <div class="col-md-5 publish-form mt-5">
+        <h5 class="text-centre">Publish your Project</h5>
+
+        <div class="col-md-10">
+            <form action="" method="post" enctype="multipart/form-data" novalidate>
+                {%csrf_token%}
+
+                {% bootstrap_form pForm%}
+                <button class="btn btn-sm btn-success">Publish</button>
+
+            </form>
+        </div>
+
+
+    </div>
+
+
+
+
+    
+ 
+</div>
+
+{% endblock %}

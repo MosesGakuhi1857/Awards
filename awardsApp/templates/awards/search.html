@@ -1,0 +1,40 @@
+{%extends 'awards/base.html'%} 
+{% block content %}
+<div class="container search">
+
+    {% if searched_projects %}
+      <h6 class="mt-5 result">Found {{ searched_projects|length }} of searched project: {{message}}</h6>
+    {% else %}
+      <h6 class="mt-5 result"> Found 0 projects for the searched project:  {{message}}</h6>
+    {% endif %}
+
+
+  {%for project in searched_projects %}
+  <div class="col-md-4">
+      <div class="row">
+        <div class="card m-3" style="width: 25rem;">
+          <a href="{%url 'project-details' project.id %}"><img src="{{project.project_image.url|safe}}"
+                  class="card-img-top" height="350" alt="..."></a>
+          <div class="card-body proj-card">
+              <h6 class="card-title">{{project.title|safe}}</h6>
+              <p class="card-text fw-light">{{project.description|safe}}</p>                  
+              <p class="card-text fw-light small">Published by {{project.publisher|safe}}</p>
+          </div>
+      </div>
+
+          
+        
+      </div>
+  </div>
+  {% empty %}
+  <div class="row">
+      <h5 class="text-center">No user found</h5>
+  </div>
+  {% endfor %}
+
+  <div class="row">
+
+ 
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,113 @@
+{%extends 'awards/base.html'%}
+{% load static %}
+{% block content %}
+
+<!-- <div class="container-fluid"> -->
+    
+    <div class="col-md-12 featured" >
+       
+            <div class="home-details">
+                <div class="proj-details">
+                {%  if top_project.project %}
+                    <h5 class="fw-light">Top rated Project</h5>
+                    <h1>{{top_project.project.title}}</h1>
+                    <p class="fw-light">Published {{top_project.project.date_published|timesince}} ago by {{top_project.project.publisher}}</p>
+                    {%  if top_project.project.location %}
+                        <p> from {{top_project.project.location}}</p>
+                    {% endif%}
+                {% endif%}
+
+                </div>
+                <div class=" container-fluid d-flex home-progress-bar">         
+                    <div class="col-md-3 col-sm-6">
+                        <div class="progress pink">
+                            <span class="progress-left">
+                                <span class="progress-bar"></span>
+                            </span>
+                            <span class="progress-right">
+                                <span class="progress-bar"></span>
+                            </span>
+                            <div class="progress-value">{{top_project.design}}</div>
+                        </div>
+                        <p class="fw-light small" >Design</p>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6">
+                        <div class="progress blue">
+                            <span class="progress-left">
+                                <span class="progress-bar"></span>
+                            </span>
+                            <span class="progress-right">
+                                <span class="progress-bar"></span>
+                            </span>
+                            <div class="progress-value">{{top_project.usability}}</div>
+                        </div>
+                        <p class="fw-light small" >Usability</p>
+
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="progress yellow">
+                            <span class="progress-left">
+                                <span class="progress-bar"></span>
+                            </span>
+                            <span class="progress-right">
+                                <span class="progress-bar"></span>
+                            </span>
+                            <div class="progress-value">{{top_project.content}}</div>
+                        </div>
+                        <p class="fw-light small" >Content</p>
+
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="progress green">
+                            <span class="progress-left">
+                                <span class="progress-bar"></span>
+                            </span>
+                            <span class="progress-right">
+                                <span class="progress-bar"></span>
+                            </span>
+                            <div class="progress-value">{{top_project.score}}</div>
+                        </div>
+                        <p class="fw-light small" >Score</p>
+
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+    </div>
+
+
+    <div class="container-fluid projects">
+        <h6 class="text-centre mb-3">Published Projects</h6>
+
+        <div class="row justify-content-center">
+            {% for project in projects %}
+
+            <div class="card m-1 mb-2" style="width: 27rem;">
+                <a href="{%url 'project-details' project.id %}"><img src="{{project.project_image.url|safe}}"
+                        class="card-img-top mt-2" height="350" alt="..."></a>
+                <div class="card-body proj-card">
+                    <h6 class="card-title">{{project.title|safe}}</h6>
+                    <p class="card-text fw-light">{{project.description|safe|truncatechars:40}}</p>                  
+                    <p class="card-text fw-light small">Published by {{project.publisher|safe}}</p>
+                </div>
+            </div>
+
+            {% empty %}
+            <p>No posted projects</p>
+
+            {% endfor %}
+        </div>
+
+    </div>
+
+
+
+
+
+
+<!-- </div> -->
+
+{% endblock %}

@@ -1,0 +1,192 @@
+{%extends 'awards/base.html'%}
+{% load static %}
+{% load bootstrap5%}
+{% block content %}
+
+
+<div class="container-fluid details-rate-review">
+
+  <div class="col-md-8 project-details">
+
+    <div class="card m-1 p-d" style="width: 69rem;">
+      <a href=""><img src="{{project.project_image.url|safe}}"
+              class="card-img-top" height="500" alt="..."></a>
+      <div class="card-body">
+        <div class="proj-description">
+           <h5 class="card-title mb-3">{{project.title|safe}}</h5>
+           <p class="card-text small">Published {{project.date_published|date|safe}}</p>
+           <p class="card-text small fw-light">Technologies: {{project.technologies|safe}}</p>
+           <p class="card-text mb-5 fw-light text-mute">{{project.description|safe}}</p>
+        </div>
+         
+          <div class="buttons d-flex justify-content-between">
+            <a href="{%url 'userProfile' project.publisher%}">
+              <button class="publisher  btn btn-secondary fw-light">
+                By {{project.publisher|safe}}
+              </button>
+            </a>
+
+            {%if request.user.id == project.publisher.id%}
+            <a class="btn btn-info "  href="{% url 'update-project' project.id%}">
+              Edit
+            </a>
+
+            {%endif%}
+
+
+
+            <a href="{{project.project_link|safe}}" target="_blank">
+              <button class="publisher btn btn-secondary fw-light">
+                Project link
+              </button>
+            </a>
+
+          </div>
+
+      </div>
+    </div>
+
+    <div class="rate-review mt-5 col-md-11">
+      <div class="card text-center">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="true" href="#" onClick="return showRatings();">Ratings</a>
+            </li>
+            <li class="nav-item d-flex">
+              <a class="nav-link" href="#" onClick="return showReviews();">Reviews </a>
+              <div class="review-count mt-1">{{project.reviews.count}}</div>
+            </li>
+            
+          </ul>
+        </div>
+        <div class="card-body">
+          <!-- Ratings -->
+          
+          <div id="ratings">
+            <!-- <fieldset class="starability-result mx-auto m-3" data-rating="5">
+            </fieldset> -->
+            <i class="fa fa-star" aria-hidden="true"></i>
+
+            <h5 class="card-title m-2">Project Ratings</h5>
+            <div class="col-md-5 rates">
+            <h6 class="mt-2 fw-light">Average Design</h6>
+              <div class="progressDesign">
+                <div class="progress-value1" style="width:100%" ><span class="">{{design}}</span></div>
+              </div>
+
+              <h6 class="mt-2 fw-light">Average Usability</h6>
+              <div class="progressUsability">
+                <div class="progress-value2" style="width:100%"><span>{{usability}}</span></div>
+              
+              </div>
+              <h6 class="mt-2 fw-light">Average Content</h6>
+              <div class="progressContent">
+                <div class="progress-value3" style="width: 100%"><span>{{content}}</span></div>
+              </div>
+              
+              <h6  class="mt-2 fw-light">Average Score</h6>
+              <div class="progressScore">
+                <div class="progress-value4" style="width: 100%"><span> {{score}}</span></div>
+              </div>
+              
+            <!-- <button type="button" class="btn btn-primary">Design Average: {{design}}</button>
+            <button type="button" class="btn btn-primary">Usability Average: {{usability}}</button>
+            <button type="button" class="btn btn-primary">Content Average: {{content}}</button>          
+            <button type="button" class="btn btn-primary">Average Score: {{score}}</button> -->
+          </div>
+           
+
+           
+
+            
+
+            {% if request.user.id != project.publisher.user.id %}
+
+                  {% if  request.user.id == project.ratings.last.rated_by.id %}
+
+                  <p class="mt-5">Thankyou for rating this project</p>
+                  {% else %}     
+                  <div class=" col-md-8 rateForm mt-4">
+                    <h6>Rate this Project</h6>
+
+                    <form action="" method="post">
+                      {% csrf_token %}
+                        <div class="row">
+                          <div class="col">
+                            {{rateForm.design }}              
+                          </div>
+                          <div class="col">
+                            {{ rateForm.usability }}              
+                          </div>
+                          <div class="col">
+                            {{ rateForm.content }}              
+                          </div>
+                          <div class="col">
+                            <button class="btn btn-sm btn-primary" style="height: 40px; width: 5rem;" >Rate</button>                   
+                          </div>
+                        </div>
+                      </form>
+                      
+                  </div>
+                  {% endif%}
+            {% else %}
+              <h6 class="mt-5">Rate this Project</h6>
+      
+              <p class="mt-3">You cannot rate your own project</p>
+          
+            {% endif %}
+          </div>
+
+          <div id="reviews">
+              <!-- Review Form -->
+              <div class="reviewForm ">
+                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#reviewModal">Review this Project</button>
+
+                
+
+                <h6>Available Reviews</h6>
+                {% for review in project.reviews.all %}
+                  {% if project.reviews.all %}
+                  <div class="review-details">
+                     <h6 class="text-mute m-4"><a href="{%url 'userProfile' review.reviewed_by%}">{{review.reviewed_by}}</a> <span class="text-mute fw-light">{{review.reviewed_on|timesince}} ago</span></h6>
+                      <p class="fw-light  m-4">{{review.review}}</p>
+
+                  </div>
+                  {% else %}
+                  <p class="fw-light">
+                    No reviews
+                  </p>
+                  {% endif%}
+                 
+                {% endfor%}
+
+
+                
+              </div>
+
+          </div>
+         
+        </div>
+      </div>
+    
+      
+
+    
+
+    </div>
+    
+    
+
+
+
+  </div>
+
+
+  {% include "modals/reviewModal.html" %}
+
+
+
+</div>
+
+{% endblock %}

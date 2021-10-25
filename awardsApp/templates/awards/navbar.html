@@ -1,0 +1,54 @@
+{% load static%}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home' %}">A-awards</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <form class="d-flex" style="margin-left: 30%;"  role="search" action="{% url 'search_project'%}">
+        <input class="form-control me-2" type="search" name="project_title"  placeholder="Search" aria-label="Search">
+       
+      </form>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+          <li class="nav-item">
+            <a href="{% url 'home' %}"></a>
+          </li>
+          <li class="nav-item">
+          </li>
+        
+          {% if user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+              <img class="nav-profile" src="{{request.user.publisher.profile_pic.url}}" alt="" width="20">
+              <i class="fas fa-user mt-1" style="font-size: 21px; color: black;"></i>              
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'userProfile' user.username %}">{{request.user}}</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{%url 'logout'%}">Logout</a></li>
+            </ul>
+          </li> 
+          {% else %}
+          <li>
+
+            <a href="{% url 'login' %}" class="btn btn-success me-3">Login </a>
+        
+          </li>
+
+        
+        {% endif %}
+        <li>
+            <a href="{% url 'publish-project' %}" class="btn btn-success">Post your Project</a>
+
+        </li>
+          
+        </ul>
+        
+      </div>
+    </div>
+  </nav>

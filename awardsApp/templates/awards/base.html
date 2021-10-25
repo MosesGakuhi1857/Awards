@@ -1,0 +1,48 @@
+{% load bootstrap5 %} 
+{% load static%}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% if title %}
+    <title>Awards - {{title}}</title>
+    {% else %}
+    <title>Awards</title>
+    {% endif %} 
+    {% block styles %} 
+      {% bootstrap_css %}
+       <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+       <link rel="stylesheet" href="{% static 'css/responsive.css' %}" />
+       <link rel="stylesheet" type="text/css" href="{% static 'css/starability-all.css'%}"/>
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+        <!-- google fonts -->
+        <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Sofia&display=swap" rel="stylesheet"> -->
+
+    {% endblock %}
+  </head>
+  <body>
+    {% include "awards/navbar.html" %} 
+
+
+    {% block content %}
+
+
+    {% endblock %} 
+
+
+
+    {% block scripts %}
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.js" integrity="sha512-DtTYd1g6TRpxfYHg+o7hVopdDBafEPnLs81XFiu5rVLr3eamPxvnuJUhwF5w4Z2GJbA/vpE7emalj7pKjnMphQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js"integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
+      <script src="{% static 'js/script.js'%}"></script>
+      {% bootstrap_javascript %} 
+    {% endblock %}
+  </body>
+</html>
