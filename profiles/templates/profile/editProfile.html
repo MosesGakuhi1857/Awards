@@ -1,0 +1,19 @@
+{% extends 'awards/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container updateProfile">
+    
+    <div class="col-md-9 editProfile">
+        <h6>Edit Profile</h6>
+
+        <form method="post" enctype="multipart/form-data"> 
+            {% csrf_token %} 
+            {{ form.as_p }} 
+            <input type="submit" value="Save"> 
+        </form> 
+
+    </div>
+</div>
+
+{% endblock %}
