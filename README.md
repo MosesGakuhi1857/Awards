@@ -63,7 +63,7 @@ Run source virtual/bin/activate to activate the virtual environment and python m
 
 ## Live link
 
-Live link: [AppAwards live link](awards-zawadi.herokuapp.com/)
+Live link: [A-awards live link](awards-zawadi.herokuapp.com/)
 
 ## Support and contact details
 
