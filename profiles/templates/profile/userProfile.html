@@ -1,0 +1,174 @@
+{%extends 'awards/base.html'%} 
+{% load static %}
+{% block content %}
+
+
+<div class="container-fluid profile">
+     <div class="container">
+        <div class="main-body">
+        
+              <!-- Breadcrumb -->
+              <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{% url 'home'%}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                </ol>
+              </nav>
+              <!-- /Breadcrumb -->
+        
+              <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="d-flex flex-column align-items-center text-center">
+                        {% if profile.profile_pic %}
+
+                            <img src="{{profile.profile_pic.url}}" alt="Admin" class="rounded-circle" width="200" height="200">
+                        {% else %}
+                            <img src="{% static 'images/avartar.jpg' %}" alt="Admin" class="rounded-circle" width="200" height="200">
+                        {% endif %}
+
+                        <div class="mt-3">
+                          <h4>{{profile.user.first_name}} {{profile.user.last_name}} </h4>
+                          <p class=" mb-1">{{profile.user.username}}</p>
+                          <p class="text-muted font-size-sm">{{profile.gender}}</p>
+                          <div class="follow-details d-flex">
+                            <i class="fa fa-users mt-1"></i>
+                            <span class="following ms-1 fw-bold">{{profile.following.count}}</span>
+                            <p class="ms-1 fw-light">following.</p>
+                            <span class="followers ms-1  fw-bold">{{profile.followers.count}}</span>
+                            <p class="ms-1 fw-light">followers.</p>
+                    
+                          </div>
+                          <p class="text-muted fw-light font-size-sm">{{profile.bio}}</p>
+
+                          <div class="follow d-flex justify-content-centre">
+                            {% if request.user != profile.user %}
+
+                            {% if follow %}
+                            <form method="post" action="{% url 'follow_unfollow'%}">
+                              {%csrf_token%}
+                              <input hidden name="userProf_id" value="{{profile.user.id}}">
+                              <button class="btn btn-outline-danger m-2">Unfollow</button>
+                            </form>
+
+                            <button class="btn btn-outline-primary m-2">Message</button>
+                            {% else %}
+                            <form method="post" action="{% url 'follow_unfollow'%}">
+                              {%csrf_token%}
+                              <input hidden name="userProf_id" value="{{profile.user.id}}">
+                              <button class="btn btn-primary ms-5 m-2">Follow</button>
+
+                            </form>
+
+
+                            {% endif %}
+                          {% endif %}
+
+                          </div>
+                          
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card mt-3">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                        <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Website</h6>
+                        <span class="text-secondary"><a href="{{profile.website.url}}">{{profile.website}}</a></span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                        <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github mr-2 icon-inline"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>Github</h6>
+                        <span class="text-secondary"><a href="{{profile.github.url}}">{{profile.github}}</a></span>
+                      </li>
+                     
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Full Name</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{profile.user.first_name}} {{profile.user.last_name}}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Email</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{profile.user.email}}
+                        </div>
+                      </div>
+                      <hr>
+                      
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Mobile</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          {{profile.mobile}}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Location</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            {{profile.location}}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        {% if profile.user.id == request.user.id %}
+                        <div class="col-sm-12">
+                          <a class="btn btn-info "  href="{% url 'update-profile' profile.user.id%}">Edit</a>
+                        </div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+    
+                  <div class="row gutters-sm prof-proj">
+                      <h6 class="text-centre">Projects Published</h6>
+          
+                    {% for project in projects %}
+                    <div class="col-sm-6 mb-3">
+                      <div class="card h-100">
+                        <div class="card-body">
+                          <h6 class="d-flex justify-content-center mb-3">{{project.title|safe}}</h6>
+                          <a href="{%url 'project-details' project.id %}"><img src="{{project.project_image.url|safe}}"
+                            class="card-img-top" height="200" alt="..."></a>
+
+                          <p class="small mt-2">{{project.description|safe|truncatechars:40}}</p>
+                          <small class="small fw-light">{{project.technologies|safe}}</small>
+
+                          
+                        </div>
+                      </div>
+                    </div>
+                    {% empty %}
+                    <p>No published projects</p>
+        
+                    {% endfor %}
+                  </div>
+    
+    
+    
+                </div>
+              </div>
+    
+            </div>
+        </div>
+
+    
+ 
+</div>
+
+{% endblock %}
