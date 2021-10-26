@@ -73,6 +73,7 @@ DATABASES['default'].update(db_from_env)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
+REGISTRATION_OPEN=True
 # Application definition
 
 INSTALLED_APPS = [

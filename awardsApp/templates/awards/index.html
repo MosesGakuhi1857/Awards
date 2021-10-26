@@ -85,7 +85,7 @@
         <div class="row justify-content-center">
             {% for project in projects %}
 
-            <div class="card m-1 mb-2" style="width: 27rem;">
+            <div class="card m-1 col-lg-3 " style="width: 27rem;">
                 <a href="{%url 'project-details' project.id %}"><img src="{{project.project_image.url|safe}}"
                         class="card-img-top mt-2" height="350" alt="..."></a>
                 <div class="card-body proj-card">
