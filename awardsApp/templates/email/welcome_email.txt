@@ -1,0 +1,3 @@
+Hello {{name}}
+
+Welcome to Awards App. You can submit your project and view rating and reviews.Also, You can view, rate and review other projects

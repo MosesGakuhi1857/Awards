@@ -4,19 +4,19 @@ from .models import Profile, Project, Review, Rating
 
 class TestAppModelsClass(TestCase):
     def setUp(self):
-        self.frank = User(id=4, username = "frank", email = "frankngumbi@gmail.com",password = "1234567")
+        self.moses = User(id=4, username = "moses", email = "kingorimoses386@gmail.com",password = "12345678")
         # self.frank.save()
 
-        self.profile = Profile(id=3, user= self.frank, bio='myself',  profile_pic='frank.jpg', location='Nairobi')
+        self.profile = Profile(id=3, user= self.moses, bio='myself',  profile_pic='maloly.jpg', location='Nairobi')
         # self.profile.save()
 
         self.project = Project(id=6,title = 'AIB',project_image = 'aib.jpg', description = 'Its all about', publisher = self.profile)
         # self.project.save()
 
-        self.rating = Rating(id=5,project=self.project, design= 7, usability=8, content=8, score =7.67, rated_by = self.frank)
+        self.rating = Rating(id=5,project=self.project, design= 7, usability=8, content=8, score =7.67, rated_by = self.moses)
         # self.review.save_review()
 
-        self.review = Review(id=7,project=self.project, review= 'Great idea', reviewed_by = self.frank)
+        self.review = Review(id=7,project=self.project, review= 'Great idea', reviewed_by = self.moses)
         # self.review.save_review()
    
     # Teardown

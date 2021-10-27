@@ -5,6 +5,9 @@ from django.conf.urls.static import static
 from django.urls import re_path, path, include
 from .views import UpdateProjectView
 from . import api
+
+
+
 urlpatterns=[
    
     path('register/', views.register, name='register'),
